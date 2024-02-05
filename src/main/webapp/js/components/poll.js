@@ -18,20 +18,23 @@ export class Poll extends Component {
 		</form>
 	`;
 
-    constructor(pollId) {
+    constructor(poll) {
         super('Poll', Poll.#template);
-        service.
-        // service.getPolls().then(polls => this.#renderPolls(polls));
+        service.getPoll(poll).then(polls => this.#renderPoll(poll))
     }
 
-    #renderPolls(polls) {
-        let list = this._select('#polls');
-        if (polls.length === 0)
-            list.innerHTML = 'No polls available';
-        else polls.forEach(poll => {
-            let item = document.createElement('div');
-            item.innerHTML = `<b>${poll.title}</b> (until ${poll.expiration})`;
-            list.append(item);
-        });
+    #renderPoll(poll) {
+        let pollOptionsElement = this._select('#poll-options');
+
+        document.getElementById("poll-title").textContent="Hamster Tax";
+
+        // ich weis, dieser teil muss noch gemacht werden.
+        // Es benötigt einen foreach loop, der über alle optionen der Poll Frage loopt und
+        // den code unten ausführt.
+        let pollOption = document.createElement('option')
+        pollOptionsElement.innerHTML = 'Yes';
+        pollOptionsElement.value = 'Yes';
+        pollOption.append(pollOptionsElement);
+
     }
 }

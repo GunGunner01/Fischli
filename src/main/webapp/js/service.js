@@ -7,7 +7,8 @@ export const service = {
 			.then(response => response.ok ? response.json() : Promise.reject(response));
 	},
 	getPoll: function(pollId) {
-		return ajax('/polls', 'GET')
+		return ajax('/api/polls', 'GET')
+			.then(response => response.ok ? response.json() : Promise.reject(response));
 	}
 };
 

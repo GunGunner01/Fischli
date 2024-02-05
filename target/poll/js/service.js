@@ -5,6 +5,10 @@ export const service = {
 	getPolls: function() {
 		return ajax('/polls', 'GET')
 			.then(response => response.ok ? response.json() : Promise.reject(response));
+	},
+	getPoll: function(pollId) {
+		return ajax('/api/polls', 'GET')
+			.then(response => response.ok ? response.json() : Promise.reject(response));
 	}
 };
 

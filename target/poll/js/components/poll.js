@@ -2,7 +2,6 @@ import { Component } from './component.js';
 import { service } from '../service.js';
 
 export class Poll extends Component {
-    
 
     static #template = `
 		<h1 id="poll-title">Hamster Tax</h1>
@@ -19,19 +18,25 @@ export class Poll extends Component {
 		</form>
 	`;
 
-    constructor() {
-        super('Polls', PollList.#template);
-        service.getPolls().then(polls => this.#renderPolls(polls));
+    constructor(poll) {
+        super('Poll', Poll.#template);
+        service.getPoll(poll).then(polls => this.#renderPoll(poll))
     }
 
-    #renderPolls(polls) {
-        let list = this._select('#polls');
-        if (polls.length === 0)
-            list.innerHTML = 'No polls available';
-        else polls.forEach(poll => {
-            let item = document.createElement('div');
-            item.innerHTML = `<b>${poll.title}</b> (until ${poll.expiration})`;
-            list.append(item);
-        });
+    #renderPoll(poll) {
+        let pollOptionsElement = this._select('#poll-options');
+
+        document.getElementById("poll-title").textContent="Hamster Tax";
+
+        let pollOption = document.createElement('option')
+        pollOptionsElement.innerHTML = 'Yes';
+        pollOptionsElement.value = 'Yes';
+        pollOption.append(poll)
+
+        // polls.forEach(poll => {
+        //     let item = document.createElement('div');
+        //     item.innerHTML = `<b>${poll.title}</b> (until ${poll.expiration})`;
+        //     list.append(item);
+        // });
     }
 }
