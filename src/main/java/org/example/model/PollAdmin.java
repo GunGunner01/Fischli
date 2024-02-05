@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class PollAdmin {
 
@@ -29,6 +30,24 @@ public class PollAdmin {
 	public List<PollInfo> getPolls() {
 		return polls.stream().map(poll -> new PollInfo(poll.getId(), poll.getTitle(), poll.getExpiration())).toList();
 	}
+
+	public List<PollInfo> getPolls(String poll_id) {
+		List<PollInfo> pollList = new ArrayList<PollInfo>();
+		for (Poll poll : polls) {
+			if ((String.valueOf(poll.getId()).equals(poll_id))) {
+				pollList.add(poll);
+				return pollList
+			}
+
+					.equals(message.getTopic())) {
+				filteredMessages.add(message);
+			}
+	}
+//		return getMessages().stream()
+//			.filter(message -> topic.equals(message.getTopic()))
+//			.collect(Collectors.toList());
+
+
 
 	public Poll findPoll(int id) throws PollNotFoundException {
 		return polls.stream().filter(poll -> poll.getId() == id).findFirst()

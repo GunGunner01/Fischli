@@ -21,9 +21,19 @@ public class PollServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String poll_id = request.getParameter("poll_id");
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.setContentType(JSON_MEDIA_TYPE);
-			List<PollInfo> polls = pollAdmin.getPolls();
+			List<PollInfo> polls = pollAdmin.getPolls(poll_id);
 		objectMapper.writeValue(response.getOutputStream(), polls);
 	}
+
+//	@Override
+//	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//		String topic = request.getParameter("topic");
+//		List<ChatMessage> messages = chatService.getMessages(topic);
+//		response.setStatus(HttpServletResponse.SC_OK);
+//		response.setContentType("application/json");
+//		objectMapper.writeValue(response.getOutputStream(), messages);
+//	}
 }
