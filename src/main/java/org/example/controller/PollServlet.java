@@ -19,6 +19,7 @@ public class PollServlet extends HttpServlet {
 	private static final ObjectMapper objectMapper = ObjectMapperFactory.createObjectMapper();
 	private static final PollAdmin pollAdmin = PollAdmin.getInstance();
 
+	// http://localhost:8080/api/polls?poll_id=2
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String poll_id = request.getParameter("poll_id");
@@ -28,12 +29,4 @@ public class PollServlet extends HttpServlet {
 		objectMapper.writeValue(response.getOutputStream(), polls);
 	}
 
-//	@Override
-//	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		String topic = request.getParameter("topic");
-//		List<ChatMessage> messages = chatService.getMessages(topic);
-//		response.setStatus(HttpServletResponse.SC_OK);
-//		response.setContentType("application/json");
-//		objectMapper.writeValue(response.getOutputStream(), messages);
-//	}
 }

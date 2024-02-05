@@ -32,22 +32,18 @@ public class PollAdmin {
 	}
 
 	public List<PollInfo> getPolls(String poll_id) {
-		List<PollInfo> pollList = new ArrayList<PollInfo>();
-		for (Poll poll : polls) {
-			if ((String.valueOf(poll.getId()).equals(poll_id))) {
-				pollList.add(poll);
-				return pollList
-			}
 
-					.equals(message.getTopic())) {
-				filteredMessages.add(message);
-			}
+		if (poll_id == null || poll_id.trim().isEmpty()) {
+			System.out.println("brö");
+
+			return getPolls();
+		}
+
+		System.out.println("bra");
+		return polls.stream()
+				.filter(poll -> poll_id.equals(String.valueOf(poll.getId())))
+				.map(poll -> new PollInfo(poll.getId(), poll.getTitle(), poll.getExpiration())).toList();
 	}
-//		return getMessages().stream()
-//			.filter(message -> topic.equals(message.getTopic()))
-//			.collect(Collectors.toList());
-
-
 
 	public Poll findPoll(int id) throws PollNotFoundException {
 		return polls.stream().filter(poll -> poll.getId() == id).findFirst()
